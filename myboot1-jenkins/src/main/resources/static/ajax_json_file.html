@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#ajax_btn").on('click', function(){
+		requestAjax();
+	});//on end
+	
+	function requestAjax(){
+$.ajax({
+	url: "boardlist.json" ,
+    //dataType : 'json' ,
+    success : function(server_result){
+   	var server_json = server_result;
+    	for(var i = 0; i < server_json.length;
+    	i++){
+	    	var result =
+	    	server_json[i].seq +":"
+	    	+ server_json[i]["title"] +":"
+	    	+ server_json[i].contents +":"
+	    	+ server_json[i].writer +":"
+	    	+ server_json[i].time +":"
+	    	+ server_json[i].pw +":"
+	    	+ server_json[i].viewcount + "<br>";
+    		$("#result").html(
+    		$("#result").html()+"<br>"
+    		+ result);//setter
+		
+    	}
+    	$("#result").css
+    	("background-color", "yellow");
+
+    } ,
+    error : function(e){alert(e);} ,
+    complete: function(){alert("서버통신완료!!");}
+});//ajax end	
+	}//requestAjax end
+});//ready end
+</script>
+</head>
+<body>
+<input type="button" id="ajax_btn" value="json파일요청">
+<div id="result" style="border:solid 3px yellow"> 
+ajax 결과를 여기에 출력합니다. 
+</div></body></html>
