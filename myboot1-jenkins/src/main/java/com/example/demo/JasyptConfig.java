@@ -25,8 +25,10 @@ public class JasyptConfig {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
         //config.setPassword("1234"); // 암호화 키 직접 소스 설정(보인다)
-        //실행시 변수 입력(sts 내부 변수입력) - 네이버서버 - (jenkins 내부 변수 입력)
-        config.setPassword(environment.getProperty("jasypt.encryptor.password"));
+        //실행시 변수 입력(sts 내부 변수입력) - 
+        //config.setPassword(environment.getProperty("jasypt.encryptor.password"));
+        //네이버서버 - (jenkins 내부 변수 입력)-리눅스 환경변수 대문자
+        config.setPassword(System.getenv("DB_PASSWORD"));
         config.setAlgorithm("PBEWithMD5AndDES"); // 알고리즘
         config.setKeyObtentionIterations("1000");
         config.setPoolSize("1");
